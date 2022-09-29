@@ -21,3 +21,20 @@ function checkStringLength(string, maxLength) {
 }
 
 checkStringLength();
+
+// Сделала для практики (задание для Кексобукинга)
+
+function getRandomFloatNumber(firstNumber, secondNumber, decimalPlaces) {
+  let resultNumber = Math.random() * (secondNumber - firstNumber) + firstNumber;
+  if (firstNumber < 0 || secondNumber < 0) {
+    return NaN;
+  } else if (secondNumber < firstNumber) {
+    resultNumber = Math.random() * (firstNumber - secondNumber) + secondNumber;
+    resultNumber = parseFloat(resultNumber).toFixed(decimalPlaces);
+    return resultNumber;
+  }
+  resultNumber = parseFloat(resultNumber).toFixed(decimalPlaces);
+  return resultNumber;
+}
+
+getRandomFloatNumber();
