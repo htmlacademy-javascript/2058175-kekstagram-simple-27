@@ -30,10 +30,10 @@ function getRandomFloatNumber(firstNumber, secondNumber, decimalPlaces) {
     return NaN;
   } else if (secondNumber < firstNumber) {
     resultNumber = Math.random() * (firstNumber - secondNumber) + secondNumber;
-    resultNumber = Number(parseFloat(resultNumber).toFixed(decimalPlaces));
+    resultNumber = parseFloat(resultNumber.toFixed(decimalPlaces));
     return resultNumber;
   }
-  resultNumber = Number(parseFloat(resultNumber).toFixed(decimalPlaces));
+  resultNumber = parseFloat(resultNumber.toFixed(decimalPlaces));
   return resultNumber;
 }
 
