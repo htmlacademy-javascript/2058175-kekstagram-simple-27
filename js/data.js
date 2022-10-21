@@ -65,7 +65,7 @@ const AVATAR_ID_MIN = 1;
 const AVATAR_ID_MAX = 6;
 
 const MIN_COMMENT_NUMBER = 0;
-const MAX_COMMENT_NUMBER = 10;
+const MAX_COMMENT_NUMBER = 200;
 
 const createMessage = () =>
   Array.from({ length: getRandomPositiveInteger(1, 2) }, () =>
@@ -87,16 +87,13 @@ const createPhotoDescription = (index) => ({
   url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomPositiveInteger(MIN_LIKES, MAX_LIKES),
-  comments: Array.from(
-    {
-      length: getRandomPositiveInteger(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER),
-    },
-    (_, commentIndex) => createComment(commentIndex + 1)
-  ),
+  comments: getRandomPositiveInteger(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER),
 });
 
 const getPhoto = () => Array.from({ length: PHOTO_COUNT }, (_, photoIndex) =>
   createPhotoDescription(photoIndex + 1)
 );
+
+createComment();
 
 export {getPhoto};
