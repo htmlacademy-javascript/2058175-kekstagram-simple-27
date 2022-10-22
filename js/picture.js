@@ -10,9 +10,11 @@ const imageFragment = document.createDocumentFragment();
 getContent.forEach((image) => {
   const pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = image.url;
-  pictureElement.querySelector('.picture__comments').textContent = image.comments;
+  pictureElement.querySelector('.picture__comments').textContent = image.comments.length;
   pictureElement.querySelector('.picture__likes').textContent = image.likes;
   imageFragment.appendChild(pictureElement);
 });
 
-pictures.appendChild(imageFragment);
+const getImageFragment = () => pictures.appendChild(imageFragment);
+
+export {getImageFragment};

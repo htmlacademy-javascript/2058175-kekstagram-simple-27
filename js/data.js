@@ -87,13 +87,16 @@ const createPhotoDescription = (index) => ({
   url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomPositiveInteger(MIN_LIKES, MAX_LIKES),
-  comments: getRandomPositiveInteger(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER),
+  comments: Array.from(
+    {
+      length: getRandomPositiveInteger(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER),
+    },
+    (_, commentIndex) => createComment(commentIndex + 1)
+  ),
 });
 
 const getPhoto = () => Array.from({ length: PHOTO_COUNT }, (_, photoIndex) =>
   createPhotoDescription(photoIndex + 1)
 );
-
-createComment();
 
 export {getPhoto};
