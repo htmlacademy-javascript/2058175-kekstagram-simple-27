@@ -65,7 +65,7 @@ const AVATAR_ID_MIN = 1;
 const AVATAR_ID_MAX = 6;
 
 const MIN_COMMENT_NUMBER = 0;
-const MAX_COMMENT_NUMBER = 10;
+const MAX_COMMENT_NUMBER = 200;
 
 const createMessage = () =>
   Array.from({ length: getRandomPositiveInteger(1, 2) }, () =>
