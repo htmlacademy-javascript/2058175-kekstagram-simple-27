@@ -15,11 +15,10 @@ function getRandomPositiveInteger(a, b) {
 //   return string.length <= length;
 // }
 
+// checkStringLength();
+
 const getRandomArrayElement = (elements) =>
   elements[getRandomPositiveInteger(0, elements.length - 1)];
-
-// checkStringLength();
-// getRandomArrayElement();
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
