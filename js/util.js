@@ -22,6 +22,4 @@ const getRandomArrayElement = (elements) =>
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomPositiveInteger};
-export {getRandomArrayElement};
-export {isEscapeKey};
+export { getRandomPositiveInteger, getRandomArrayElement, isEscapeKey };
