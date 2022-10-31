@@ -24,6 +24,7 @@ function openModal () {
   document.addEventListener('keydown', onPopupEscKeydown);
   uploadImage.style.filter = 'none';
   sliderElement.style.display = 'none';
+  controlValue.value = '100%';
 }
 
 function closeModal () {
@@ -32,7 +33,6 @@ function closeModal () {
   document.removeEventListener('keydown', onPopupEscKeydown);
   uploadButton.value = '';
   commentText.value = '';
-  controlValue.value = '100%';
   uploadImage.style.transform = `scale(${1})`;
   uploadImage.className = 'img-upload__preview';
   effectButton[0].checked = true;
