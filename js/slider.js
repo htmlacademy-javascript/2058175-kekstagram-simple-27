@@ -11,10 +11,10 @@ function moveSlider() {
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
-    max: 1,
+    max: 100,
   },
-  start: 0,
-  step: 0.1,
+  start: 100,
+  step: 1,
   connect: 'lower',
 });
 
@@ -25,7 +25,7 @@ effectButtonList.addEventListener('click', (evt) => {
         min: 0,
         max: 1
       },
-      start: 0,
+      start: 1,
       step: 0.1
     });
     sliderElement.noUiSlider.on('update', () => {
@@ -39,7 +39,7 @@ effectButtonList.addEventListener('click', (evt) => {
         min: 0,
         max: 1
       },
-      start: 0,
+      start: 1,
       step: 0.1
     });
     sliderElement.noUiSlider.on('update', () => {
@@ -53,7 +53,7 @@ effectButtonList.addEventListener('click', (evt) => {
         min: 0,
         max: 100
       },
-      start: 0,
+      start: 100,
       step: 1
     });
     sliderElement.noUiSlider.on('update', () => {
@@ -67,7 +67,7 @@ effectButtonList.addEventListener('click', (evt) => {
         min: 0,
         max: 3
       },
-      start: 0,
+      start: 3,
       step: 0.1
     });
     sliderElement.noUiSlider.on('update', () => {
@@ -81,7 +81,7 @@ effectButtonList.addEventListener('click', (evt) => {
         min: 1,
         max: 3
       },
-      start: 0,
+      start: 3,
       step: 0.1
     });
     sliderElement.noUiSlider.on('update', () => {
@@ -98,4 +98,4 @@ effectButtonList.addEventListener('click', (evt) => {
   }
 });
 
-export { sliderElement, moveSlider };
+export { moveSlider };

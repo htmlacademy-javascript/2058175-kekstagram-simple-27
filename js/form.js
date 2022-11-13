@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {sliderElement} from './slider.js';
+const sliderElement = document.querySelector('.effect-level__slider');
 
 
 const uploadButton = document.querySelector('.img-upload__input');

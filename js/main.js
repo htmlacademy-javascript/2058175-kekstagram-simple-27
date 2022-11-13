@@ -1,13 +1,10 @@
-import {getPhoto} from './data.js';
-getPhoto();
+import './util.js';
+import './data.js';
+import './form.js';
+import './photo-editor.js';
+import './picture.js';
+import './slider.js';
+
 import {getImageFragment} from './picture.js';
+
 getImageFragment();
-import {openModal, closeModal} from './form.js';
-openModal();
-closeModal();
-import {changeSize, disableButton, changeEffect} from './photo-editor.js';
-changeSize();
-disableButton();
-changeEffect();
-import {moveSlider} from './slider.js';
-moveSlider();
