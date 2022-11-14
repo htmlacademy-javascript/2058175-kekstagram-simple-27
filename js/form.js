@@ -49,3 +49,4 @@ closeButton.addEventListener('click', (evt) => {
 });
 
 export {openModal, closeModal};
+

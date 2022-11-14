@@ -11,12 +11,6 @@ function getRandomPositiveInteger(a, b) {
   return Math.floor(result);
 }
 
-// function checkStringLength(string, length) {
-//   return string.length <= length;
-// }
-
-// checkStringLength();
-
 const getRandomArrayElement = (elements) =>
   elements[getRandomPositiveInteger(0, elements.length - 1)];
 
