@@ -12,10 +12,48 @@ const containers = successContainer || errorContainer;
 
 const getData = () => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
-    .then((response) => response.json())
-    .then((image) => {
-      getContent(image);
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((image) => {
+          getContent(image);
+        });
+      } else {
+        createMessage();
+      }
+    })
+    .catch(() => {
+      createMessage();
     });
+};
+
+function createMessage() {
+  const messageContainer = document.createElement('div');
+  const messageText = document.createElement('p');
+  const messageButton = document.createElement('button');
+  messageButton.type = 'button';
+  messageText.textContent = 'Не удалось загрузить фотографии.';
+  messageButton.textContent = 'OK';
+  messageContainer.classList.add('failed');
+  messageButton.classList.add('button__failed');
+  messageContainer.appendChild(messageText);
+  messageContainer.appendChild(messageButton);
+  document.body.appendChild(messageContainer);
+  messageButton.addEventListener('click', () => {
+    messageContainer.classList.add('hidden');
+  });
+}
+
+const setFormSubmit = (onSuccess, onFail) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch('https://27.javascript.pages.academy/kekstagram-simple', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(() => onSuccess())
+      .catch(() => onFail());
+  });
 };
 
 const onAlertEscKeydown = (evt) => {
@@ -27,7 +65,7 @@ const onAlertEscKeydown = (evt) => {
 
 const deleteParentElements = (element) => {
   const parents = [];
-  while (element.parentNode.nodeName.toLowerCase() != 'body') {
+  while (element.parentNode.nodeName.toLowerCase() !== 'body') {
     element = element.parentElement;
     parents.push(element);
   }
@@ -40,27 +78,21 @@ function closeAlert(evt) {
   evt.preventDefault();
   document.removeEventListener('keydown', onAlertEscKeydown);
   deleteParentElements(evt.target);
+  containers.classList.remove('opened');
 }
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const formData = new FormData(evt.target);
-  fetch('https://27.javascript.pages.academy/kekstagram-simple', {
-    method: 'POST',
-    body: formData,
-  })
-    .then(() => {
-      closeModal();
-      success.cloneNode(true);
-      document.body.appendChild(success);
-      document.addEventListener('keydown', onAlertEscKeydown);
-    })
-    .catch(() => {
-      error.cloneNode(true);
-      document.body.appendChild(error);
-      document.addEventListener('keydown', onAlertEscKeydown);
-    });
-});
+function successDataSend() {
+  closeModal();
+  success.cloneNode(true);
+  document.body.appendChild(success);
+  document.addEventListener('keydown', onAlertEscKeydown);
+}
+
+function failDataSend() {
+  error.cloneNode(true);
+  document.body.appendChild(error);
+  document.addEventListener('keydown', onAlertEscKeydown);
+}
 
 successButton.addEventListener('click', (evt) => {
   closeAlert(evt);
@@ -70,4 +102,5 @@ errorButton.addEventListener('click', (evt) => {
   closeAlert(evt);
 });
 
-export { getData };
+export { getData, setFormSubmit, successDataSend, failDataSend };
+
