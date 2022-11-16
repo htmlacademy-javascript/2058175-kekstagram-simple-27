@@ -1,5 +1,6 @@
 import { closeModal } from './form.js';
 import { isEscapeKey } from './util.js';
+import { getContent } from './picture.js';
 const form = document.querySelector('.img-upload__form');
 const success = document.querySelector('#success').content;
 const successContainer = success.querySelector('.success');
@@ -7,8 +8,15 @@ const successButton = success.querySelector('.success__button');
 const error = document.querySelector('#error').content;
 const errorContainer = error.querySelector('.error');
 const errorButton = error.querySelector('.error__button');
-
 const containers = successContainer || errorContainer;
+
+const getData = () => {
+  fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+    .then((response) => response.json())
+    .then((image) => {
+      getContent(image);
+    });
+};
 
 const onAlertEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -28,7 +36,7 @@ const deleteParentElements = (element) => {
   }
 };
 
-function closeAlert (evt) {
+function closeAlert(evt) {
   evt.preventDefault();
   document.removeEventListener('keydown', onAlertEscKeydown);
   deleteParentElements(evt.target);
@@ -62,4 +70,4 @@ errorButton.addEventListener('click', (evt) => {
   closeAlert(evt);
 });
 
-
+export { getData };

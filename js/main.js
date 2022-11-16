@@ -6,6 +6,6 @@ import './picture.js';
 import './slider.js';
 import './server.js';
 
-import {getImageFragment} from './picture.js';
+import {getData} from './server.js';
 
-getImageFragment();
+getData();
