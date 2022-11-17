@@ -52,7 +52,9 @@ function closeAlert(evt) {
 const addElement = (element) => {
   element.cloneNode(true);
   document.body.appendChild(element);
-  document.addEventListener('keydown', onAlertEscKeydown);
+  // document.addEventListener('keydown', onAlertEscKeydown);
+  // document.addEventListener('click', hideElements);
+  containers.classList.remove('hidden');
 };
 
 function successDataSend() {
@@ -65,6 +67,7 @@ function failDataSend() {
   error.cloneNode(true);
   addElement(error);
   errorButton.addEventListener('click', closeAlert);
+  document.addEventListener('keydown', onAlertEscKeydown);
 }
 
 export { createMessage, successDataSend, failDataSend };
