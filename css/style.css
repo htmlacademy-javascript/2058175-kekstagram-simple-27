@@ -1446,6 +1446,10 @@ main {
     text-align: center;
 }
 
+.failed p {
+  line-height: normal;
+}
+
 .button__failed {
   background-color: transparent;
     padding: 15px 20px;

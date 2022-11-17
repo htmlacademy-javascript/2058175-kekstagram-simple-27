@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { sendData, successDataSend, failDataSend } from './server.js';
+import { sendData } from './server.js';
+import { successDataSend, failDataSend } from './message.js';
 const sliderElement = document.querySelector('.effect-level__slider');
 
 const uploadButton = document.querySelector('.img-upload__input');

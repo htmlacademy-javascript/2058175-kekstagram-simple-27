@@ -7,7 +7,7 @@ import './slider.js';
 import './server.js';
 
 import {getData} from './server.js';
-import { successDataSend, failDataSend } from './server.js';
+import { successDataSend, failDataSend } from './message.js';
 import {setFormSubmit} from './form.js';
 
 getData();
