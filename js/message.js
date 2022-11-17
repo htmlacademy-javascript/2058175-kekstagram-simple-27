@@ -5,7 +5,8 @@ const success = document.querySelector('#success').content;
 const successButton = success.querySelector('.success__button');
 const error = document.querySelector('#error').content;
 const errorButton = error.querySelector('.error__button');
-const containers = success.querySelector('.success') || error.querySelector('.error');
+const containers =
+  success.querySelector('.success') || error.querySelector('.error');
 
 function createMessage() {
   const messageContainer = document.createElement('div');
@@ -53,20 +54,14 @@ function successDataSend() {
   success.cloneNode(true);
   document.body.appendChild(success);
   document.addEventListener('keydown', onAlertEscKeydown);
+  successButton.addEventListener('click', closeAlert);
 }
 
 function failDataSend() {
   error.cloneNode(true);
   document.body.appendChild(error);
   document.addEventListener('keydown', onAlertEscKeydown);
+  errorButton.addEventListener('click', closeAlert);
 }
-
-successButton.addEventListener('click', (evt) => {
-  closeAlert(evt);
-});
-
-errorButton.addEventListener('click', (evt) => {
-  closeAlert(evt);
-});
 
 export { createMessage, successDataSend, failDataSend };

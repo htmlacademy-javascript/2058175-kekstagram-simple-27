@@ -1,6 +1,4 @@
 import { isEscapeKey } from './util.js';
-import { sendData } from './server.js';
-import { successDataSend, failDataSend } from './message.js';
 const sliderElement = document.querySelector('.effect-level__slider');
 
 const uploadButton = document.querySelector('.img-upload__input');
@@ -11,39 +9,6 @@ const commentText = document.querySelector('.text__description');
 const effectButton = document.querySelectorAll('.effects__radio');
 const controlValue = document.querySelector('.scale__control--value');
 const uploadImage = document.querySelector('.img-upload__preview');
-const form = document.querySelector('.img-upload__form');
-const formButton = document.querySelector('.img-upload__submit');
-
-
-const blockFormButton = () => {
-  formButton.disabled = true;
-  formButton.textContent = 'Сохранение';
-};
-
-const unblockFormButton = () => {
-  formButton.disabled = false;
-  formButton.textContent = 'Опубликовать';
-};
-
-const setFormSubmit = (onSuccess, onFail) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    blockFormButton();
-    sendData(
-      () => {
-        onSuccess();
-        successDataSend();
-        unblockFormButton();
-      },
-      () => {
-        onFail();
-        failDataSend();
-        unblockFormButton();
-      },
-      new FormData(evt.target)
-    );
-  });
-};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -82,4 +47,4 @@ closeButton.addEventListener('click', (evt) => {
   closeModal();
 });
 
-export { openModal, closeModal, setFormSubmit };
+export { openModal, closeModal };
