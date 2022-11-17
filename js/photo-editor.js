@@ -37,13 +37,4 @@ effectButtonList.addEventListener('click', (evt) => {
   }
 });
 
-// effectButtonList.addEventListener('click', (evt) => {
-//   if (evt.target.nodeName === 'INPUT') {
-//     uploadImage.classList.add(`effects__preview--${evt.target.value}`);
-//     uploadImage.className = `img-upload__preview effects__preview--${evt.target.value}`;
-//   }
-// });
-
 export { changeSize, changeEffect };
-
-// export { changeSize };

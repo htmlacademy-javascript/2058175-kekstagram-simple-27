@@ -1,7 +1,6 @@
 import { closeModal } from './form.js';
 import { isEscapeKey } from './util.js';
 import { getContent } from './picture.js';
-const form = document.querySelector('.img-upload__form');
 const success = document.querySelector('#success').content;
 const successContainer = success.querySelector('.success');
 const successButton = success.querySelector('.success__button');
@@ -43,17 +42,24 @@ function createMessage() {
   });
 }
 
-const setFormSubmit = (onSuccess, onFail) => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const formData = new FormData(evt.target);
-    fetch('https://27.javascript.pages.academy/kekstagram-simple', {
+const sendData = (onSuccess, onFail, body) => {
+  fetch(
+    'https://27.javascript.pages.academy/kekstagram-simple',
+    {
       method: 'POST',
-      body: formData,
+      body,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
     })
-      .then(() => onSuccess())
-      .catch(() => onFail());
-  });
+    .catch(() => {
+      onFail();
+    });
 };
 
 const onAlertEscKeydown = (evt) => {
@@ -63,22 +69,10 @@ const onAlertEscKeydown = (evt) => {
   }
 };
 
-const deleteParentElements = (element) => {
-  const parents = [];
-  while (element.parentNode.nodeName.toLowerCase() !== 'body') {
-    element = element.parentElement;
-    parents.push(element);
-  }
-  for (let i = 0; i < parents.length; i++) {
-    parents[i].remove();
-  }
-};
-
 function closeAlert(evt) {
   evt.preventDefault();
   document.removeEventListener('keydown', onAlertEscKeydown);
-  deleteParentElements(evt.target);
-  containers.classList.remove('opened');
+  containers.remove();
 }
 
 function successDataSend() {
@@ -102,5 +96,5 @@ errorButton.addEventListener('click', (evt) => {
   closeAlert(evt);
 });
 
-export { getData, setFormSubmit, successDataSend, failDataSend };
+export { createMessage, sendData, getData, successDataSend, failDataSend };
 

@@ -1,6 +1,6 @@
-import {isEscapeKey} from './util.js';
+import { isEscapeKey } from './util.js';
+import { sendData, successDataSend, failDataSend } from './server.js';
 const sliderElement = document.querySelector('.effect-level__slider');
-
 
 const uploadButton = document.querySelector('.img-upload__input');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -10,6 +10,24 @@ const commentText = document.querySelector('.text__description');
 const effectButton = document.querySelectorAll('.effects__radio');
 const controlValue = document.querySelector('.scale__control--value');
 const uploadImage = document.querySelector('.img-upload__preview');
+const form = document.querySelector('.img-upload__form');
+
+const setFormSubmit = (onSuccess, onFail) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => {
+        onSuccess();
+        successDataSend();
+      },
+      () => {
+        onFail();
+        failDataSend();
+      },
+      new FormData(evt.target)
+    );
+  });
+};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -18,7 +36,7 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-function openModal () {
+function openModal() {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
@@ -27,7 +45,7 @@ function openModal () {
   controlValue.value = '100%';
 }
 
-function closeModal () {
+function closeModal() {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
@@ -48,5 +66,4 @@ closeButton.addEventListener('click', (evt) => {
   closeModal();
 });
 
-export {openModal, closeModal};
-
+export { openModal, closeModal, setFormSubmit };
