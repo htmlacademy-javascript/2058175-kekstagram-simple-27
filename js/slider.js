@@ -97,5 +97,3 @@ effectButtonList.addEventListener('click', (evt) => {
     });
   }
 });
-
-export { moveSlider };

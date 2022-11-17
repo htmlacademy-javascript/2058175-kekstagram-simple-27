@@ -36,5 +36,3 @@ effectButtonList.addEventListener('click', (evt) => {
     changeEffect(evt);
   }
 });
-
-export { changeSize, changeEffect };

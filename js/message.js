@@ -49,18 +49,21 @@ function closeAlert(evt) {
   deleteParentElements(evt.target);
 }
 
+const addElement = (element) => {
+  element.cloneNode(true);
+  document.body.appendChild(element);
+  document.addEventListener('keydown', onAlertEscKeydown);
+};
+
 function successDataSend() {
   closeModal();
-  success.cloneNode(true);
-  document.body.appendChild(success);
-  document.addEventListener('keydown', onAlertEscKeydown);
+  addElement(success);
   successButton.addEventListener('click', closeAlert);
 }
 
 function failDataSend() {
   error.cloneNode(true);
-  document.body.appendChild(error);
-  document.addEventListener('keydown', onAlertEscKeydown);
+  addElement(error);
   errorButton.addEventListener('click', closeAlert);
 }
 
