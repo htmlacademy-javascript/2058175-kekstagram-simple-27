@@ -1,12 +1,14 @@
 import { closeModal } from './form.js';
 import { isEscapeKey } from './util.js';
 
-const success = document.querySelector('#success').content;
-const successButton = success.querySelector('.success__button');
-const error = document.querySelector('#error').content;
-const errorButton = error.querySelector('.error__button');
-const containers =
-  success.querySelector('.success') || error.querySelector('.error');
+const successTemplate = document
+  .querySelector('#success')
+  .content.querySelector('.success');
+const errorTemplate = document
+  .querySelector('#error')
+  .content.querySelector('.error');
+const successMessageElement = successTemplate.cloneNode(true);
+const errorMessageElement = errorTemplate.cloneNode(true);
 
 function createMessage() {
   const messageContainer = document.createElement('div');
@@ -25,49 +27,48 @@ function createMessage() {
   });
 }
 
-const deleteParentElements = (element) => {
-  const parents = [];
-  while (element.parentNode.nodeName.toLowerCase() !== 'body') {
-    element = element.parentElement;
-    parents.push(element);
-  }
-  for (let i = 0; i < parents.length; i++) {
-    parents[i].remove();
-  }
-};
-
-const onAlertEscKeydown = (evt) => {
+const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    containers.remove();
+    closeMessage();
   }
 };
 
-function closeAlert(evt) {
-  evt.preventDefault();
-  document.removeEventListener('keydown', onAlertEscKeydown);
-  deleteParentElements(evt.target);
-}
+const closeMessageElements = [
+  'success',
+  'success__button',
+  'error',
+  'error__button',
+];
 
-const addElement = (element) => {
-  element.cloneNode(true);
-  document.body.appendChild(element);
-  // document.addEventListener('keydown', onAlertEscKeydown);
-  // document.addEventListener('click', hideElements);
-  containers.classList.remove('hidden');
+const onClick = (evt) => {
+  for (let i = 0; i < closeMessageElements.length; i++) {
+    if (evt.target.className === closeMessageElements[i]) {
+      closeMessage();
+    }
+  }
 };
 
-function successDataSend() {
-  closeModal();
-  addElement(success);
-  successButton.addEventListener('click', closeAlert);
-}
+const successDataSend = () => {
+  document.body.append(successMessageElement);
+  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('click', onClick);
+};
 
-function failDataSend() {
-  error.cloneNode(true);
-  addElement(error);
-  errorButton.addEventListener('click', closeAlert);
-  document.addEventListener('keydown', onAlertEscKeydown);
+const failDataSend = () => {
+  document.body.append(errorMessageElement);
+  document.addEventListener('click', onClick);
+};
+
+function closeMessage() {
+  const messageElement =
+    document.querySelector('.success') || document.querySelector('.error');
+  if (messageElement === document.querySelector('.success')) {
+    closeModal();
+  }
+  messageElement.remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', onClick);
 }
 
 export { createMessage, successDataSend, failDataSend };
