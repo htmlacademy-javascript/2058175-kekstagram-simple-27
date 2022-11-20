@@ -1,20 +1,20 @@
 const controlSmaller = document.querySelector('.scale__control--smaller');
 const controlBigger = document.querySelector('.scale__control--bigger');
 const controlValue = document.querySelector('.scale__control--value');
-const uploadImage = document.querySelector('.img-upload__preview');
+const uploadImageElement = document.querySelector('.img-upload__preview');
 const effectButtonList = document.querySelector('.effects__list');
 
 controlValue.value = 100;
 
 function changeSize() {
   const number = controlValue.value / 100;
-  uploadImage.style.transform = `scale(${number})`;
+  uploadImageElement.style.transform = `scale(${number})`;
   controlValue.value = `${controlValue.value}%`;
 }
 
 function changeEffect(evt) {
-  uploadImage.classList.add(`effects__preview--${evt.target.value}`);
-  uploadImage.className = `img-upload__preview effects__preview--${evt.target.value}`;
+  uploadImageElement.classList.add(`effects__preview--${evt.target.value}`);
+  uploadImageElement.className = `img-upload__preview effects__preview--${evt.target.value}`;
 }
 
 controlBigger.addEventListener('click', () => {

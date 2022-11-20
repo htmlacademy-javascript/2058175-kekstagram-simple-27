@@ -47,4 +47,4 @@ closeButton.addEventListener('click', (evt) => {
   closeModal();
 });
 
-export { openModal, closeModal };
+export { openModal, closeModal, onPopupEscKeydown};

@@ -1,5 +1,5 @@
-import { closeModal } from './form.js';
 import { isEscapeKey } from './util.js';
+import { onPopupEscKeydown } from './form.js';
 
 const successTemplate = document
   .querySelector('#success')
@@ -27,10 +27,11 @@ function createMessage() {
   });
 }
 
-const onPopupEscKeydown = (evt) => {
+const onALertEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeMessage();
+    document.removeEventListener('keydown', onALertEscKeydown);
   }
 };
 
@@ -51,24 +52,22 @@ const onClick = (evt) => {
 
 const successDataSend = () => {
   document.body.append(successMessageElement);
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', onALertEscKeydown);
   document.addEventListener('click', onClick);
 };
 
 const failDataSend = () => {
   document.body.append(errorMessageElement);
+  document.addEventListener('keydown', onALertEscKeydown);
   document.addEventListener('click', onClick);
 };
 
 function closeMessage() {
-  const messageElement =
+  const templateElement =
     document.querySelector('.success') || document.querySelector('.error');
-  if (messageElement === document.querySelector('.success')) {
-    closeModal();
-  }
-  messageElement.remove();
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  templateElement.remove();
   document.removeEventListener('click', onClick);
+  document.addEventListener('keydown', onPopupEscKeydown);
 }
 
 export { createMessage, successDataSend, failDataSend };
