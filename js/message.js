@@ -67,7 +67,9 @@ function closeMessage() {
     document.querySelector('.success') || document.querySelector('.error');
   templateElement.remove();
   document.removeEventListener('click', onClick);
-  document.addEventListener('keydown', onPopupEscKeydown);
+  if(document.body.classList.contains('modal-open')) {
+    document.addEventListener('keydown', onPopupEscKeydown);
+  }
 }
 
 export { createMessage, successDataSend, failDataSend };
