@@ -1,11 +1,11 @@
-const uploadImage = document.querySelector('.img-upload__preview');
+const uploadImageElement = document.querySelector('.img-upload__preview');
 const effectButtonList = document.querySelector('.effects__list');
 const sliderElement = document.querySelector('.effect-level__slider');
-const sliderValue = document.querySelector('.effect-level__value');
+const sliderValueElement = document.querySelector('.effect-level__value');
 
 function moveSlider() {
   sliderElement.style.display = 'block';
-  sliderValue.value = sliderElement.noUiSlider.get();
+  sliderValueElement.value = sliderElement.noUiSlider.get();
 }
 
 noUiSlider.create(sliderElement, {
@@ -30,7 +30,7 @@ effectButtonList.addEventListener('click', (evt) => {
     });
     sliderElement.noUiSlider.on('update', () => {
       moveSlider();
-      uploadImage.style.filter = `grayscale(${sliderValue.value})`;
+      uploadImageElement.style.filter = `grayscale(${sliderValueElement.value})`;
     });
   }
   else if(evt.target.id === 'effect-sepia') {
@@ -44,7 +44,7 @@ effectButtonList.addEventListener('click', (evt) => {
     });
     sliderElement.noUiSlider.on('update', () => {
       moveSlider();
-      uploadImage.style.filter = `sepia(${sliderValue.value})`;
+      uploadImageElement.style.filter = `sepia(${sliderValueElement.value})`;
     });
   }
   else if(evt.target.id === 'effect-marvin') {
@@ -58,7 +58,7 @@ effectButtonList.addEventListener('click', (evt) => {
     });
     sliderElement.noUiSlider.on('update', () => {
       moveSlider();
-      uploadImage.style.filter = `invert(${sliderValue.value}${'%'})`;
+      uploadImageElement.style.filter = `invert(${sliderValueElement.value}${'%'})`;
     });
   }
   else if(evt.target.id === 'effect-phobos') {
@@ -72,7 +72,7 @@ effectButtonList.addEventListener('click', (evt) => {
     });
     sliderElement.noUiSlider.on('update', () => {
       moveSlider();
-      uploadImage.style.filter = `blur(${sliderValue.value}${'px'})`;
+      uploadImageElement.style.filter = `blur(${sliderValueElement.value}${'px'})`;
     });
   }
   else if(evt.target.id === 'effect-heat') {
@@ -86,14 +86,15 @@ effectButtonList.addEventListener('click', (evt) => {
     });
     sliderElement.noUiSlider.on('update', () => {
       moveSlider();
-      uploadImage.style.filter = `brightness(${sliderValue.value})`;
+      uploadImageElement.style.filter = `brightness(${sliderValueElement.value})`;
     });
   }
   else if(evt.target.id === 'effect-none') {
     sliderElement.noUiSlider.on('update', () => {
-      sliderValue.value = 0;
-      uploadImage.style.filter = 'none';
+      sliderValueElement.value = 0;
+      uploadImageElement.style.filter = 'none';
       sliderElement.style.display = 'none';
     });
   }
 });
+

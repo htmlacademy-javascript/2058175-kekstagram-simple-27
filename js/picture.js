@@ -1,5 +1,5 @@
 const pictureTemplate = document.querySelector('#picture').content;
-const pictures = document.querySelector('.pictures');
+const imageElement = document.querySelector('.pictures');
 
 const getContent = (image) => {
   const imageFragment = document.createDocumentFragment();
@@ -11,7 +11,7 @@ const getContent = (image) => {
     pictureElement.querySelector('.picture__likes').textContent = likes;
     imageFragment.appendChild(pictureElement);
   });
-  pictures.appendChild(imageFragment);
+  imageElement.appendChild(imageFragment);
 };
 
 export {getContent};

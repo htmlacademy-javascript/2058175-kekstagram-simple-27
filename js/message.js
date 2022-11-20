@@ -50,13 +50,13 @@ const onClick = (evt) => {
   }
 };
 
-const successDataSend = () => {
+const showSuccess = () => {
   document.body.append(successMessageElement);
   document.addEventListener('keydown', onALertEscKeydown);
   document.addEventListener('click', onClick);
 };
 
-const failDataSend = () => {
+const showFail = () => {
   document.body.append(errorMessageElement);
   document.addEventListener('keydown', onALertEscKeydown);
   document.addEventListener('click', onClick);
@@ -72,4 +72,4 @@ function closeMessage() {
   }
 }
 
-export { createMessage, successDataSend, failDataSend };
+export { createMessage, showSuccess, showFail };

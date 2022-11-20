@@ -1,16 +1,16 @@
 import { sendData } from './api.js';
-import { successDataSend, failDataSend } from './message.js';
+import { showSuccess, showFail } from './message.js';
 const formElement = document.querySelector('.img-upload__form');
-const formButton = document.querySelector('.img-upload__submit');
+const formButtonElement = document.querySelector('.img-upload__submit');
 
 const blockFormButton = () => {
-  formButton.disabled = true;
-  formButton.textContent = 'Сохранение';
+  formButtonElement.disabled = true;
+  formButtonElement.textContent = 'Сохранение';
 };
 
 const unblockFormButton = () => {
-  formButton.disabled = false;
-  formButton.textContent = 'Опубликовать';
+  formButtonElement.disabled = false;
+  formButtonElement.textContent = 'Опубликовать';
 };
 
 const setFormSubmit = (onSuccess, onFail) => {
@@ -20,12 +20,12 @@ const setFormSubmit = (onSuccess, onFail) => {
     sendData(
       () => {
         onSuccess();
-        successDataSend();
+        showSuccess();
         unblockFormButton();
       },
       () => {
         onFail();
-        failDataSend();
+        showFail();
         unblockFormButton();
       },
       new FormData(evt.target)

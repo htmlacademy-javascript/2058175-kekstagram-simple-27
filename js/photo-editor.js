@@ -1,15 +1,21 @@
-const controlSmaller = document.querySelector('.scale__control--smaller');
-const controlBigger = document.querySelector('.scale__control--bigger');
-const controlValue = document.querySelector('.scale__control--value');
+const Parameters = {
+  STEP: 25,
+  VALUE_MIN: 25,
+  VALUE_MAX: 100,
+};
+
+const controlSmallerElement = document.querySelector('.scale__control--smaller');
+const controlBiggerElement = document.querySelector('.scale__control--bigger');
+const controlValueElement = document.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview');
 const effectButtonList = document.querySelector('.effects__list');
 
-controlValue.value = 100;
+controlValueElement.value = 100;
 
 function changeSize() {
-  const number = controlValue.value / 100;
+  const number = controlValueElement.value / 100;
   uploadImageElement.style.transform = `scale(${number})`;
-  controlValue.value = `${controlValue.value}%`;
+  controlValueElement.value = `${controlValueElement.value}%`;
 }
 
 function changeEffect(evt) {
@@ -17,16 +23,16 @@ function changeEffect(evt) {
   uploadImageElement.className = `img-upload__preview effects__preview--${evt.target.value}`;
 }
 
-controlBigger.addEventListener('click', () => {
-  if (parseInt(controlValue.value, 10) < 100) {
-    controlValue.value = parseInt(controlValue.value, 10) + 25;
+controlBiggerElement.addEventListener('click', () => {
+  if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
+    controlValueElement.value = parseInt(controlValueElement.value, 10) + Parameters.STEP;
     changeSize();
   }
 });
 
-controlSmaller.addEventListener('click', () => {
-  if (parseInt(controlValue.value, 10) > 25) {
-    controlValue.value = parseInt(controlValue.value, 10) - 25;
+controlSmallerElement.addEventListener('click', () => {
+  if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
+    controlValueElement.value = parseInt(controlValueElement.value, 10) - Parameters.STEP;
     changeSize();
   }
 });
