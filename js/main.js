@@ -1,13 +1,9 @@
-import {getPhoto} from './data.js';
-getPhoto();
-import {getImageFragment} from './picture.js';
-getImageFragment();
-import {openModal, closeModal} from './form.js';
-openModal();
-closeModal();
-import {changeSize, disableButton, changeEffect} from './photo-editor.js';
-changeSize();
-disableButton();
-changeEffect();
-import {moveSlider} from './slider.js';
-moveSlider();
+import {onUploadButtonClick} from './form.js';
+import {getData} from './api.js';
+import { showSuccess, showFail } from './message.js';
+import {initAlertOpen} from './sending_data.js';
+
+getData();
+onUploadButtonClick();
+
+initAlertOpen(showSuccess, showFail);

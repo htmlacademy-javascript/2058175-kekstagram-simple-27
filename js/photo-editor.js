@@ -1,50 +1,42 @@
-const controlSmaller = document.querySelector('.scale__control--smaller');
-const controlBigger = document.querySelector('.scale__control--bigger');
-const controlValue = document.querySelector('.scale__control--value');
-const uploadImage = document.querySelector('.img-upload__preview');
-const effectButtonList = document.querySelector('.effects__list');
+const Parameters = {
+  STEP: 25,
+  VALUE_MIN: 25,
+  VALUE_MAX: 100,
+};
 
-controlValue.value = 100;
+const controlSmallerELement = document.querySelector(
+  '.scale__control--smaller'
+);
+const controlBiggerElement = document.querySelector('.scale__control--bigger');
+const controlValueElement = document.querySelector('.scale__control--value');
+const uploadImageElement = document.querySelector('.img-upload__preview');
+
+controlValueElement.value = 100;
 
 function changeSize() {
-  const number = controlValue.value / 100;
-  uploadImage.style.transform = `scale(${number})`;
-  controlValue.value = String(`${controlValue.value}%`);
+  const number = controlValueElement.value / 100;
+  uploadImageElement.style.transform = `scale(${number})`;
+  controlValueElement.value = `${controlValueElement.value}%`;
 }
 
-function disableButton() {
-  EventTarget.disabled = true;
-}
+const onControlBiggerCLick = () => {
+  controlBiggerElement.addEventListener('click', () => {
+    if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
+      controlValueElement.value =
+        parseInt(controlValueElement.value, 10) + Parameters.STEP;
+      changeSize();
+    }
+  });
+};
 
-function changeEffect(evt) {
-  if (evt.target.nodeName === 'INPUT') {
-    uploadImage.classList.add(`effects__preview--${evt.target.value}`);
-    uploadImage.className = `img-upload__preview effects__preview--${evt.target.value}`;
-  }
-}
+const onControlSmallerClick = () => {
+  controlSmallerELement.addEventListener('click', () => {
+    if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
+      controlValueElement.value =
+        parseInt(controlValueElement.value, 10) - Parameters.STEP;
+      changeSize();
+    }
+  });
+};
 
-controlBigger.addEventListener('click', () => {
-  if (parseInt(controlValue.value, 10) < 100) {
-    controlValue.value = parseInt(controlValue.value, 10) + 25;
-    changeSize();
-  }
-  if (parseInt(controlValue.value, 10) === 100) {
-    disableButton();
-  }
-});
-
-controlSmaller.addEventListener('click', () => {
-  if (parseInt(controlValue.value, 10) > 25) {
-    controlValue.value = parseInt(controlValue.value, 10) - 25;
-    changeSize();
-  }
-  if (parseInt(controlValue.value, 10) === 25) {
-    disableButton();
-  }
-});
-
-effectButtonList.addEventListener('click', (evt) => {
-  changeEffect(evt);
-});
-
-export { changeSize, disableButton, changeEffect };
+export {onControlBiggerCLick, onControlSmallerClick};

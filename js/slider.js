@@ -1,101 +1,93 @@
-const uploadImage = document.querySelector('.img-upload__preview');
-const effectButtonList = document.querySelector('.effects__list');
+const uploadImageElement = document.querySelector('.img-upload__preview');
+const effectButtonListElement = document.querySelector('.effects__list');
+const sliderContainerElement = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
-const sliderValue = document.querySelector('.effect-level__value');
+const sliderValueElement = document.querySelector('.effect-level__value');
 
-function moveSlider() {
-  sliderElement.style.display = 'block';
-  sliderValue.value = sliderElement.noUiSlider.get();
-}
+const EFFECTS = [
+  {
+    name: 'effect-chrome',
+    style: 'grayscale',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: '',
+  },
+  {
+    name: 'effect-sepia',
+    style: 'sepia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: '',
+  },
+  {
+    name: 'effect-marvin',
+    style: 'invert',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: '%',
+  },
+  {
+    name: 'effect-phobos',
+    style: 'blur',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    unit: 'px',
+  },
+  {
+    name: 'effect-heat',
+    style: 'brightness',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    unit: '',
+  },
+];
 
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
-    max: 1,
+    max: 100,
   },
-  start: 0,
-  step: 0.1,
+  start: 100,
+  step: 1,
   connect: 'lower',
 });
 
-effectButtonList.addEventListener('click', (evt) => {
-  if (evt.target.id === 'effect-chrome') {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1
-      },
-      start: 0,
-      step: 0.1
-    });
-    sliderElement.noUiSlider.on('update', () => {
-      moveSlider();
-      uploadImage.style.filter = `grayscale(${sliderValue.value})`;
-    });
-  }
-  else if(evt.target.id === 'effect-sepia') {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 1
-      },
-      start: 0,
-      step: 0.1
-    });
-    sliderElement.noUiSlider.on('update', () => {
-      moveSlider();
-      uploadImage.style.filter = `sepia(${sliderValue.value})`;
-    });
-  }
-  else if(evt.target.id === 'effect-marvin') {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 100
-      },
-      start: 0,
-      step: 1
-    });
-    sliderElement.noUiSlider.on('update', () => {
-      moveSlider();
-      uploadImage.style.filter = `invert(${sliderValue.value}${'%'})`;
-    });
-  }
-  else if(evt.target.id === 'effect-phobos') {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 0,
-        max: 3
-      },
-      start: 0,
-      step: 0.1
-    });
-    sliderElement.noUiSlider.on('update', () => {
-      moveSlider();
-      uploadImage.style.filter = `blur(${sliderValue.value}${'px'})`;
-    });
-  }
-  else if(evt.target.id === 'effect-heat') {
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: 1,
-        max: 3
-      },
-      start: 0,
-      step: 0.1
-    });
-    sliderElement.noUiSlider.on('update', () => {
-      moveSlider();
-      uploadImage.style.filter = `brightness(${sliderValue.value})`;
-    });
-  }
-  else if(evt.target.id === 'effect-none') {
-    sliderElement.noUiSlider.on('update', () => {
-      sliderValue.value = 0;
-      uploadImage.style.filter = 'none';
-      sliderElement.style.display = 'none';
-    });
+let currentEffect = 'none';
+
+effectButtonListElement.addEventListener('click', (evt) => {
+  for (let i = 0; i < EFFECTS.length; i++) {
+    if (evt.target.id === EFFECTS[i].name) {
+      currentEffect = EFFECTS[i];
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: currentEffect.min,
+          max: currentEffect.max,
+        },
+        start: currentEffect.max,
+        step: currentEffect.step,
+      });
+      sliderElement.noUiSlider.on('update', () => {
+        moveSlider();
+        uploadImageElement.style.filter = `${currentEffect.style}(${sliderValueElement.value}${currentEffect.unit})`;
+      });
+    } else if (evt.target.id === 'effect-none') {
+      sliderElement.noUiSlider.on('update', () => {
+        sliderValueElement.value = 0;
+        uploadImageElement.style.filter = 'none';
+        sliderElement.style.display = 'none';
+        sliderContainerElement.classList.add('hidden');
+      });
+    }
   }
 });
 
-export { sliderElement, moveSlider };
+function moveSlider() {
+  sliderElement.style.display = 'block';
+  sliderContainerElement.classList.remove('hidden');
+  sliderValueElement.value = sliderElement.noUiSlider.get();
+}
