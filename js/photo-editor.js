@@ -4,35 +4,35 @@ const Parameters = {
   VALUE_MAX: 100,
 };
 
-const controlSmallerElement = document.querySelector('.scale__control--smaller');
-const controlBiggerElement = document.querySelector('.scale__control--bigger');
-const controlValueElement = document.querySelector('.scale__control--value');
-const uploadImageElement = document.querySelector('.img-upload__preview');
+const controlSmaller = document.querySelector('.scale__control--smaller');
+const controlBigger = document.querySelector('.scale__control--bigger');
+const controlValue = document.querySelector('.scale__control--value');
+const uploadImage = document.querySelector('.img-upload__preview');
 const effectButtonList = document.querySelector('.effects__list');
 
-controlValueElement.value = 100;
+controlValue.value = 100;
 
 function changeSize() {
-  const number = controlValueElement.value / 100;
-  uploadImageElement.style.transform = `scale(${number})`;
-  controlValueElement.value = `${controlValueElement.value}%`;
+  const number = controlValue.value / 100;
+  uploadImage.style.transform = `scale(${number})`;
+  controlValue.value = `${controlValue.value}%`;
 }
 
 function changeEffect(evt) {
-  uploadImageElement.classList.add(`effects__preview--${evt.target.value}`);
-  uploadImageElement.className = `img-upload__preview effects__preview--${evt.target.value}`;
+  uploadImage.classList.add(`effects__preview--${evt.target.value}`);
+  uploadImage.className = `img-upload__preview effects__preview--${evt.target.value}`;
 }
 
-controlBiggerElement.addEventListener('click', () => {
-  if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
-    controlValueElement.value = parseInt(controlValueElement.value, 10) + Parameters.STEP;
+controlBigger.addEventListener('click', () => {
+  if (parseInt(controlValue.value, 10) < Parameters.VALUE_MAX) {
+    controlValue.value = parseInt(controlValue.value, 10) + Parameters.STEP;
     changeSize();
   }
 });
 
-controlSmallerElement.addEventListener('click', () => {
-  if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
-    controlValueElement.value = parseInt(controlValueElement.value, 10) - Parameters.STEP;
+controlSmaller.addEventListener('click', () => {
+  if (parseInt(controlValue.value, 10) > Parameters.VALUE_MIN) {
+    controlValue.value = parseInt(controlValue.value, 10) - Parameters.STEP;
     changeSize();
   }
 });
