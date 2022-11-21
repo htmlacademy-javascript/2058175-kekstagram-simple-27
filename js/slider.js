@@ -1,5 +1,5 @@
 const uploadImageElement = document.querySelector('.img-upload__preview');
-const effectButtonList = document.querySelector('.effects__list');
+const effectButtonListElement = document.querySelector('.effects__list');
 const sliderContainerElement = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValueElement = document.querySelector('.effect-level__value');
@@ -59,7 +59,7 @@ noUiSlider.create(sliderElement, {
 
 let currentEffect = 'none';
 
-effectButtonList.addEventListener('click', (evt) => {
+effectButtonListElement.addEventListener('click', (evt) => {
   for (let i = 0; i < EFFECTS.length; i++) {
     if (evt.target.id === EFFECTS[i].name) {
       currentEffect = EFFECTS[i];

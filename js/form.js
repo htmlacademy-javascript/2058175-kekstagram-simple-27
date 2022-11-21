@@ -1,17 +1,18 @@
 import { isEscapeKey } from './util.js';
-import './photo-editor.js';
+import {onControlBiggerCLick, onControlSmallerClick} from './photo-editor.js';
 import './slider.js';
 const sliderElement = document.querySelector('.effect-level__slider');
 
-const uploadButton = document.querySelector('.img-upload__input');
+const uploadButtonElement = document.querySelector('.img-upload__input');
 const overlayElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
-const closeButton = document.querySelector('.img-upload__cancel');
+const closeButtonElement = document.querySelector('.img-upload__cancel');
 const commentElement = document.querySelector('.text__description');
-const effectButton = document.querySelectorAll('.effects__radio');
-const controlValue = document.querySelector('.scale__control--value');
-const uploadImage = document.querySelector('.img-upload__preview');
+const effectButtonElements = document.querySelectorAll('.effects__radio');
+const controlValueElement = document.querySelector('.scale__control--value');
+const uploadImageElement = document.querySelector('.img-upload__preview');
 const sliderContainerElement = document.querySelector('.effect-level');
+const formButton = document.querySelector('.img-upload__submit');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -20,35 +21,50 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-function openModal() {
+const openModal = () => {
   overlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  uploadImage.style.filter = 'none';
+  uploadImageElement.style.filter = 'none';
   sliderElement.style.display = 'none';
-  controlValue.value = '100%';
+  controlValueElement.value = '100%';
   sliderContainerElement.classList.add('hidden');
-}
+  onControlBiggerCLick();
+  onControlSmallerClick();
+};
 
 function closeModal() {
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-  uploadButton.value = '';
+  uploadButtonElement.value = '';
   commentElement.value = '';
-  uploadImage.style.transform = `scale(${1})`;
-  uploadImage.className = 'img-upload__preview';
-  effectButton[0].checked = true;
+  uploadImageElement.style.transform = `scale(${1})`;
+  uploadImageElement.className = 'img-upload__preview';
+  effectButtonElements[0].checked = true;
 }
 
-uploadButton.addEventListener('change', (evt) => {
-  evt.preventDefault();
-  openModal();
-});
+const onCloseButtonClick = () => {
+  closeButtonElement.addEventListener('click', () => {
+    closeModal();
+  });
+};
 
-closeButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  closeModal();
-});
+const onUploadButtonClick = () => {
+  uploadButtonElement.addEventListener('change', () => {
+    openModal();
+  });
+  onCloseButtonClick();
+};
 
-export { openModal, closeModal, onPopupEscKeydown};
+const blockFormButton = () => {
+  formButton.disabled = true;
+  formButton.textContent = 'Сохранение';
+};
+
+const unblockFormButton = () => {
+  formButton.disabled = false;
+  formButton.textContent = 'Опубликовать';
+};
+
+export { onUploadButtonClick, openModal, closeModal, onPopupEscKeydown, blockFormButton, unblockFormButton};

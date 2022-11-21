@@ -1,16 +1,16 @@
 import { isEscapeKey } from './util.js';
 import { onPopupEscKeydown } from './form.js';
 
-const successTemplate = document
+const successTemplateElement = document
   .querySelector('#success')
   .content.querySelector('.success');
-const errorTemplate = document
+const errorTemplateElement = document
   .querySelector('#error')
   .content.querySelector('.error');
-const successMessageElement = successTemplate.cloneNode(true);
-const errorMessageElement = errorTemplate.cloneNode(true);
+const successMessageElement = successTemplateElement.cloneNode(true);
+const errorMessageElement = errorTemplateElement.cloneNode(true);
 
-function createMessage() {
+const createMessage = () => {
   const messageContainer = document.createElement('div');
   const messageText = document.createElement('p');
   const messageButton = document.createElement('button');
@@ -25,7 +25,7 @@ function createMessage() {
   messageButton.addEventListener('click', () => {
     messageContainer.classList.add('hidden');
   });
-}
+};
 
 const onALertEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
