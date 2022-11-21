@@ -11,6 +11,7 @@ const commentElement = document.querySelector('.text__description');
 const effectButton = document.querySelectorAll('.effects__radio');
 const controlValue = document.querySelector('.scale__control--value');
 const uploadImage = document.querySelector('.img-upload__preview');
+const sliderContainerElement = document.querySelector('.effect-level');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -26,6 +27,7 @@ function openModal() {
   uploadImage.style.filter = 'none';
   sliderElement.style.display = 'none';
   controlValue.value = '100%';
+  sliderContainerElement.classList.add('hidden');
 }
 
 function closeModal() {

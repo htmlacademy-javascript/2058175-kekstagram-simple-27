@@ -1,4 +1,4 @@
-import { getContent } from './picture.js';
+import { renderImage } from './picture.js';
 import { createMessage } from './message.js';
 import { closeModal, onPopupEscKeydown } from './form.js';
 
@@ -7,7 +7,7 @@ const getData = () => {
     .then((response) => {
       if (response.ok) {
         response.json().then((image) => {
-          getContent(image);
+          renderImage(image);
         });
       } else {
         createMessage();
