@@ -1,9 +1,3 @@
-const uploadImageElement = document.querySelector('.img-upload__preview');
-const effectButtonListElement = document.querySelector('.effects__list');
-const sliderContainerElement = document.querySelector('.effect-level');
-const sliderElement = document.querySelector('.effect-level__slider');
-const sliderValueElement = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'effect-chrome',
@@ -46,6 +40,12 @@ const EFFECTS = [
     unit: '',
   },
 ];
+
+const uploadImageElement = document.querySelector('.img-upload__preview');
+const effectButtonListElement = document.querySelector('.effects__list');
+const sliderContainerElement = document.querySelector('.effect-level');
+const sliderElement = document.querySelector('.effect-level__slider');
+const sliderValueElement = document.querySelector('.effect-level__value');
 
 noUiSlider.create(sliderElement, {
   range: {

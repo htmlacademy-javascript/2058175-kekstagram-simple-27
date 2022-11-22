@@ -27,11 +27,11 @@ const createMessage = () => {
   });
 };
 
-const onALertEscKeydown = (evt) => {
+const onAlertEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeMessage();
-    document.removeEventListener('keydown', onALertEscKeydown);
+    document.removeEventListener('keydown', onAlertEscKeydown);
   }
 };
 
@@ -42,7 +42,7 @@ const closeMessageElements = [
   'error__button',
 ];
 
-const onClick = (evt) => {
+const closeElementsOnClick = (evt) => {
   for (let i = 0; i < closeMessageElements.length; i++) {
     if (evt.target.className === closeMessageElements[i]) {
       closeMessage();
@@ -52,21 +52,21 @@ const onClick = (evt) => {
 
 const showSuccess = () => {
   document.body.append(successMessageElement);
-  document.addEventListener('keydown', onALertEscKeydown);
-  document.addEventListener('click', onClick);
+  document.addEventListener('keydown', onAlertEscKeydown);
+  document.addEventListener('click', closeElementsOnClick);
 };
 
 const showFail = () => {
   document.body.append(errorMessageElement);
-  document.addEventListener('keydown', onALertEscKeydown);
-  document.addEventListener('click', onClick);
+  document.addEventListener('keydown', onAlertEscKeydown);
+  document.addEventListener('click', closeElementsOnClick);
 };
 
 function closeMessage() {
   const templateElement =
     document.querySelector('.success') || document.querySelector('.error');
   templateElement.remove();
-  document.removeEventListener('click', onClick);
+  document.removeEventListener('click', closeElementsOnClick);
   if(document.body.classList.contains('modal-open')) {
     document.addEventListener('keydown', onPopupEscKeydown);
   }
