@@ -7,8 +7,6 @@ const Parameters = {
 const controlValueElement = document.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview');
 
-controlValueElement.value = 100;
-
 function changeSize() {
   const number = controlValueElement.value / 100;
   uploadImageElement.style.transform = `scale(${number})`;
@@ -19,7 +17,7 @@ const onControlBiggerCLick = () => {
   if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
     controlValueElement.value =
       parseInt(controlValueElement.value, 10) + Parameters.STEP;
-  } else if (parseInt(controlValueElement.value, 10) === Parameters.VALUE_MAX) {
+  } else {
     controlValueElement.value = 100;
   }
   changeSize();
@@ -29,7 +27,7 @@ const onControlSmallerClick = () => {
   if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
     controlValueElement.value =
       parseInt(controlValueElement.value, 10) - Parameters.STEP;
-  } else if (parseInt(controlValueElement.value, 10) === Parameters.VALUE_MIN) {
+  } else {
     controlValueElement.value = 25;
   }
   changeSize();
