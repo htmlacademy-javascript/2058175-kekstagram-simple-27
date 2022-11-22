@@ -13,6 +13,10 @@ const controlValueElement = document.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview');
 const sliderContainerElement = document.querySelector('.effect-level');
 const formButton = document.querySelector('.img-upload__submit');
+const controlSmallerELement = document.querySelector(
+  '.scale__control--smaller'
+);
+const controlBiggerElement = document.querySelector('.scale__control--bigger');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -29,8 +33,8 @@ const openModal = () => {
   sliderElement.style.display = 'none';
   controlValueElement.value = '100%';
   sliderContainerElement.classList.add('hidden');
-  onControlBiggerCLick();
-  onControlSmallerClick();
+  controlBiggerElement.addEventListener('click', onControlBiggerCLick);
+  controlSmallerELement.addEventListener('click', onControlSmallerClick);
 };
 
 function closeModal() {

@@ -1,9 +1,9 @@
 import {onUploadButtonClick} from './form.js';
 import {getData} from './api.js';
 import { showSuccess, showFail } from './message.js';
-import {initAlertOpen} from './sending_data.js';
+import {initListenerAlertOpen} from './init-listener.js';
 
 getData();
 onUploadButtonClick();
 
-initAlertOpen(showSuccess, showFail);
+initListenerAlertOpen(showSuccess, showFail);

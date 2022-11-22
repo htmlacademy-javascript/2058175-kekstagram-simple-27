@@ -4,10 +4,6 @@ const Parameters = {
   VALUE_MAX: 100,
 };
 
-const controlSmallerELement = document.querySelector(
-  '.scale__control--smaller'
-);
-const controlBiggerElement = document.querySelector('.scale__control--bigger');
 const controlValueElement = document.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview');
 
@@ -20,23 +16,23 @@ function changeSize() {
 }
 
 const onControlBiggerCLick = () => {
-  controlBiggerElement.addEventListener('click', () => {
-    if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
-      controlValueElement.value =
-        parseInt(controlValueElement.value, 10) + Parameters.STEP;
-      changeSize();
-    }
-  });
+  if (parseInt(controlValueElement.value, 10) < Parameters.VALUE_MAX) {
+    controlValueElement.value =
+      parseInt(controlValueElement.value, 10) + Parameters.STEP;
+  } else if (parseInt(controlValueElement.value, 10) === Parameters.VALUE_MAX) {
+    controlValueElement.value = 100;
+  }
+  changeSize();
 };
 
 const onControlSmallerClick = () => {
-  controlSmallerELement.addEventListener('click', () => {
-    if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
-      controlValueElement.value =
-        parseInt(controlValueElement.value, 10) - Parameters.STEP;
-      changeSize();
-    }
-  });
+  if (parseInt(controlValueElement.value, 10) > Parameters.VALUE_MIN) {
+    controlValueElement.value =
+      parseInt(controlValueElement.value, 10) - Parameters.STEP;
+  } else if (parseInt(controlValueElement.value, 10) === Parameters.VALUE_MIN) {
+    controlValueElement.value = 25;
+  }
+  changeSize();
 };
 
-export {onControlBiggerCLick, onControlSmallerClick};
+export { onControlBiggerCLick, onControlSmallerClick };
