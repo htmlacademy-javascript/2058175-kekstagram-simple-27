@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import {onControlBiggerCLick, onControlSmallerClick} from './photo-editor.js';
+import {onControlBiggerClick, onControlSmallerClick} from './photo-editor.js';
 import './slider.js';
 const sliderElement = document.querySelector('.effect-level__slider');
 
@@ -12,8 +12,8 @@ const effectButtonElements = document.querySelectorAll('.effects__radio');
 const controlValueElement = document.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview');
 const sliderContainerElement = document.querySelector('.effect-level');
-const formButton = document.querySelector('.img-upload__submit');
-const controlSmallerELement = document.querySelector(
+const formButtonElement = document.querySelector('.img-upload__submit');
+const controlSmallerElement = document.querySelector(
   '.scale__control--smaller'
 );
 const controlBiggerElement = document.querySelector('.scale__control--bigger');
@@ -33,8 +33,8 @@ const openModal = () => {
   sliderElement.style.display = 'none';
   controlValueElement.value = '100%';
   sliderContainerElement.classList.add('hidden');
-  controlBiggerElement.addEventListener('click', onControlBiggerCLick);
-  controlSmallerELement.addEventListener('click', onControlSmallerClick);
+  controlBiggerElement.addEventListener('click', onControlBiggerClick);
+  controlSmallerElement.addEventListener('click', onControlSmallerClick);
 };
 
 function closeModal() {
@@ -62,13 +62,13 @@ const onUploadButtonClick = () => {
 };
 
 const blockFormButton = () => {
-  formButton.disabled = true;
-  formButton.textContent = 'Сохранение';
+  formButtonElement.disabled = true;
+  formButtonElement.textContent = 'Сохранение';
 };
 
 const unblockFormButton = () => {
-  formButton.disabled = false;
-  formButton.textContent = 'Опубликовать';
+  formButtonElement.disabled = false;
+  formButtonElement.textContent = 'Опубликовать';
 };
 
 export { onUploadButtonClick, openModal, closeModal, onPopupEscKeydown, blockFormButton, unblockFormButton};
